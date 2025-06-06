@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientesTable extends Migration
+class CreateBarberosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('barberos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('bank_account')->nullable();
+            $table->text('special_notes')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('barberos');
     }
 }
